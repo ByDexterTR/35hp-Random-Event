@@ -72,21 +72,6 @@
 		"en"	"{green}Shotgun Gravity + 500 HP, {default}round starting!"
 		"tr"	"{green}Pompalı Gravity + 500 Can, {default}raundu başlıyor!"
 	}
-	"Lastthree"
-	{
-		"en"	"{default}The last {green}3 second {default}of the round start"
-		"tr"	"{default}Raundun başlamasına son {green}3 saniye"
-	}
-	"Lasttwo"
-	{
-		"en"	"{default}The last {green}2 second {default}of the round start"
-		"tr"	"{default}Raundun başlamasına son {green}2 saniye"
-	}
-	"Lastone"
-	{
-		"en"	"{default}The last {green}1 second {default}of the round start"
-		"tr"	"{default}Raundun başlamasına son {green}1 saniye"
-	}
 	"Goround"
 	{
 		"en"	"{default}The round has begun!"
