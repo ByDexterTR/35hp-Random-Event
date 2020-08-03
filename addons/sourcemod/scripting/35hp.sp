@@ -18,6 +18,9 @@ int m_flNextSecondaryAttack = -1;
 
 // HANDLE //
 Handle hCvarPluginEnabled;
+Handle bCvarPluginEnabled;
+Handle g_Tkrediver;
+Handle g_CTkrediver;
 
 // CONVAR //
 ConVar g_T_Kredi_Miktari;
@@ -34,7 +37,7 @@ public Plugin myinfo =
 	name = "35hp Random Event",
 	author = "ByDexter",
 	description = "35hp haritalarında rastgele event yapar",
-	version = "1.0",
+	version = "1.1",
 	url = "https://steamcommunity.com/id/ByDexterTR/"
 };
 
@@ -43,14 +46,22 @@ public void OnPluginStart()
 	LoadTranslations("35hpevent.phrases.txt");
 	RegAdminCmd("sm_hpwinner2", turwinkredisit, ADMFLAG_ROOT, "KULLANMAYIN! MILLETE KREDI ATAR / DONT USE!");
 	RegAdminCmd("sm_hpwinner3", turwinkredisict, ADMFLAG_ROOT, "KULLANMAYIN! MILLETE KREDI ATAR / DONT USE!");
-        HookEvent("round_start", El_Basi, EventHookMode_PostNoCopy);   
-        HookEvent("round_end", El_Sonu, EventHookMode_PostNoCopy);
+    HookEvent("round_start", El_Basi, EventHookMode_PostNoCopy);   
+    HookEvent("round_end", El_Sonu, EventHookMode_PostNoCopy);
 	m_flNextSecondaryAttack = FindSendPropInfo("CBaseCombatWeapon", "m_flNextSecondaryAttack");
-	HookConVarChange(hCvarPluginEnabled = CreateConVar("sm_norecoil_enable", "0", "NoRecoil enabled"), OnConVarChanged);
-	g_Prefix = CreateConVar("35hp_prefix", "ByDexter", "PLUGIN PREFIX");
-	g_T_Kredi_Miktari = CreateConVar("t_credit", "20", "T WIN CREDIT", FCVAR_NOTIFY); 
-	g_CT_Kredi_Miktari = CreateConVar("ct_credit", "20", "CT WIN CREDIT", FCVAR_NOTIFY);
+	HookConVarChange(hCvarPluginEnabled = CreateConVar("sm_norecoil_enable", "0", "NoRecoil enabled", FCVAR_NOTIFY, true, 0.0, true, 1.0), OnConVarChanged);
+	HookConVarChange(bCvarPluginEnabled = CreateConVar("sm_bunny_enable", "0", "Bunny enabled", FCVAR_NOTIFY, true, 0.0, true, 1.0), OnConVarChanged);
+	g_Prefix = CreateConVar("35hp_prefix", "ByDexter", "PLUGIN PREFIX", FCVAR_NOTIFY);
+	g_Tkrediver = CreateConVar("twin_credit_enable", "1", "T Give Credit Enabled/Disabled", FCVAR_NOTIFY, true, 0.0, true, 1.0);
+	g_CTkrediver = CreateConVar("ctwin_credit_enable", "1", "CT Give Credit Enabled/Disabled", FCVAR_NOTIFY, true, 0.0, true, 1.0);
+	g_T_Kredi_Miktari = CreateConVar("twin_credit", "20", "T WIN CREDIT", FCVAR_NOTIFY, true, 0.0, false); 
+	g_CT_Kredi_Miktari = CreateConVar("ctwin_credit", "20", "CT WIN CREDIT", FCVAR_NOTIFY, true, 0.0, false);
 	AutoExecConfig(true, "35hp.event", "sourcemod");
+}
+
+public void OnMapStart()
+{
+	SetCvar("mp_freezetime", 3);
 }
 
 public void OnConfigsExecuted()
@@ -60,30 +71,36 @@ public void OnConfigsExecuted()
 
 public Action turwinkredisit(int client, int args)
 {
-	GetConVarString(g_T_Kredi_Miktari, T_Kredi_Miktari, sizeof(T_Kredi_Miktari));
-	CPrintToChatAll("{orchid}[%s] %t", text_prefix, "Twinprint", T_Kredi_Miktari);
-	for (int i = 1; i <= MaxClients; i++)
-	if(IsClientInGame(i))
-	{  
-		if(GetClientTeam(i) == CS_TEAM_T)
-		{
-			int tT_Kredi_Miktari = GetConVarInt(g_T_Kredi_Miktari);
-			Store_SetClientCredits(i, Store_GetClientCredits(i) + tT_Kredi_Miktari);
+	if(GetConVarInt(g_Tkrediver))
+	{
+		GetConVarString(g_T_Kredi_Miktari, T_Kredi_Miktari, sizeof(T_Kredi_Miktari));
+		CPrintToChatAll("{orchid}[%s] %t", text_prefix, "Twinprint", T_Kredi_Miktari);
+		for (int i = 1; i <= MaxClients; i++)
+		if(IsClientInGame(i))
+		{  
+			if(GetClientTeam(i) == CS_TEAM_T)
+			{
+				int tT_Kredi_Miktari = GetConVarInt(g_T_Kredi_Miktari);
+				Store_SetClientCredits(i, Store_GetClientCredits(i) + tT_Kredi_Miktari);
+			}
 		}
 	}
 }
 
 public Action turwinkredisict(int client, int args)
 {
-	GetConVarString(g_CT_Kredi_Miktari, CT_Kredi_Miktari, sizeof(CT_Kredi_Miktari));
-	CPrintToChatAll("{orchid}[%s] %t", text_prefix, "CTwinprint", CT_Kredi_Miktari);	
-	for (int i = 1; i <= MaxClients; i++) 
-	if(IsClientInGame(i))
-	{  
-		if(GetClientTeam(i) == CS_TEAM_CT)
-		{
-			int cCT_Kredi_Miktari = GetConVarInt(g_CT_Kredi_Miktari);
-			Store_SetClientCredits(i, Store_GetClientCredits(i) + cCT_Kredi_Miktari);
+	if(GetConVarInt(g_CTkrediver))
+	{
+		GetConVarString(g_CT_Kredi_Miktari, CT_Kredi_Miktari, sizeof(CT_Kredi_Miktari));
+		CPrintToChatAll("{orchid}[%s] %t", text_prefix, "CTwinprint", CT_Kredi_Miktari);	
+		for (int i = 1; i <= MaxClients; i++) 
+		if(IsClientInGame(i))
+		{  
+			if(GetClientTeam(i) == CS_TEAM_CT)
+			{
+				int cCT_Kredi_Miktari = GetConVarInt(g_CT_Kredi_Miktari);
+				Store_SetClientCredits(i, Store_GetClientCredits(i) + cCT_Kredi_Miktari);
+			}
 		}
 	}
 }
@@ -164,6 +181,24 @@ public void UpdateConVars()
 		SetConVarInt(FindConVar("weapon_recoil_scale"), 2);
 		SetConVarInt(FindConVar("weapon_recoil_suppression_shots"), 4);
 	}
+	if (GetConVarBool(bCvarPluginEnabled))
+	{
+		SetConVarInt(FindConVar("sv_enablebunnyhopping"), 1);
+		SetConVarInt(FindConVar("sv_autobunnyhopping"), 1);
+		SetConVarInt(FindConVar("sv_airaccelerate"), 2000);
+		SetConVarInt(FindConVar("sv_staminajumpcost"), 0);
+		SetConVarInt(FindConVar("sv_staminalandcost"), 0);
+		SetConVarInt(FindConVar("sv_staminamax"), 0);
+	}
+	else
+	{
+		SetConVarInt(FindConVar("sv_enablebunnyhopping"), 0);
+		SetConVarInt(FindConVar("sv_autobunnyhopping"), 0);
+		SetConVarInt(FindConVar("sv_airaccelerate"), 12);
+		SetConVarFloat(FindConVar("sv_staminajumpcost"), 0.080);
+		SetConVarFloat(FindConVar("sv_staminalandcost"), 0.050);
+		SetConVarInt(FindConVar("sv_staminamax"), 80);
+	}
 }
 
 public Action El_Basi(Handle event, const char[] name, bool dontBroadcast)
@@ -173,8 +208,7 @@ public Action El_Basi(Handle event, const char[] name, bool dontBroadcast)
 	{
 		SilahlariSil(i);
 	}
-	SetCvar("sv_maxspeed", 0);
-	CreateTimer(1.0, Son3, TIMER_FLAG_NO_MAPCHANGE);
+	CreateTimer(3.0, Basla, TIMER_FLAG_NO_MAPCHANGE);
 	hpeventi = 0;
 	hpeventi = GetRandomInt(1, 12);
 	if(hpeventi == 1)
@@ -239,27 +273,8 @@ public Action El_Basi(Handle event, const char[] name, bool dontBroadcast)
 	}
 }
 
-public Action Son3(Handle Timer)
-{
-	CPrintToChatAll("{orchid}[%s] %t", text_prefix, "Lastthree");
-	CreateTimer(1.0, Son2, TIMER_FLAG_NO_MAPCHANGE);	
-}
-
-public Action Son2(Handle Timer)
-{
-	CPrintToChatAll("{orchid}[%s] %t", text_prefix, "Lasttwo");
-	CreateTimer(1.0, Son1, TIMER_FLAG_NO_MAPCHANGE);	
-}
-
-public Action Son1(Handle Timer)
-{
-	CPrintToChatAll("{orchid}[%s] %t", text_prefix, "Lastone");
-	CreateTimer(1.0, Basla, TIMER_FLAG_NO_MAPCHANGE);	
-}
-
 public Action Basla(Handle Timer)
 {
-	SetCvar("sv_maxspeed", 320);
 	CPrintToChatAll("{orchid}[%s] %t", text_prefix, "Goround");
 	for (int i = 1; i <= MaxClients; i++) 
 	if(IsClientInGame(i))
@@ -275,7 +290,7 @@ public Action Basla(Handle Timer)
 		if(hpeventi == 2)
 		{
 			GivePlayerItem(i, "weapon_knife");
-			SetCvar("abner_bhop", 1)
+			SetCvar("sm_bunny_enable", 1)
 		}
 		else
 		if(hpeventi == 3)
@@ -355,8 +370,32 @@ public Action El_Sonu(Handle event, const char[] name, bool dontBroadcast)
 	SetCvar("sm_norecoil_enable", 0);
 	SetCvar("sv_infinite_ammo", 0);
 	SetCvar("sv_gravity", 800);
-	SetCvar("abner_bhop", 0);
+	SetCvar("sm_bunny_enable", 0);
 	SetCvar("mp_damage_headshot_only", 0);
+	SetCvar("mp_freezetime", 3);
 	int WinningTeam = GetEventInt(event, "winner");
 	ServerCommand("sm_hpwinner%d", WinningTeam);
+}
+
+public void OnAutoConfigsBuffered()
+{
+    CreateTimer(3.0, thirtyfivehpcontrol);
+}
+
+public Action thirtyfivehpcontrol(Handle timer)
+{
+    char filename[512];
+    GetPluginFilename(INVALID_HANDLE, filename, sizeof(filename));
+    char mapname[PLATFORM_MAX_PATH];
+    GetCurrentMap(mapname, sizeof(mapname));
+    if (StrContains(mapname, "35hp_", false) == -1)
+    {
+        ServerCommand("sm plugins unload %s", filename);
+    }
+    else 
+    if (StrContains(mapname, "35hp_", false) == 0)
+    {
+        ServerCommand("sm plugins load %s", filename);
+    }
+    return Plugin_Stop;
 }
