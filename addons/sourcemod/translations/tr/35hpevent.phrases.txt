@@ -1,0 +1,69 @@
+"Phrases"
+{
+	"Twinprint"
+	{
+		"#format"	"{1:s}"
+		"tr"	"{orange}Terörist takımı {default}kazandığı için {green}{1} kredi kazandılar."
+	}
+	"CTwinprint"
+	{
+		"#format"	"{1:s}"
+		"tr"	"{darkblue}Anti terörist takımı {default}kazandığı için {green}{1} kredi kazandılar."
+	}
+	"SSGprint"
+	{
+		"tr"	"{green}Mag7 + Bhop, {default}raundu başlıyor!"
+	}
+	"Bhopprint"
+	{
+		"tr"	"{green}USP + Hs, {default}raundu başlıyor!"
+	}
+	"Spaceprint"
+	{
+		"tr"	"{green}Negev + Sekmeme + Hız, {default}raundu başlıyor!"
+	}
+	"Speedprint"
+	{
+		"tr"	"{green}SSG + Sekmeme, {default}raundu başlıyor!"
+	}
+	"Negevprint"
+	{
+		"tr"	"{green}Ak47 + 100 Can, {default}raundu başlıyor!"
+	}
+	"Glockprint"
+	{
+		"tr"	"{green}Deagle, {default}raundu başlıyor!"
+	}
+	"Deagleprint"
+	{
+		"tr"	"{green}Scar20 + Dürbünsüz, {default}raundu başlıyor!"
+	}
+	"Dberettaprint"
+	{
+		"tr"	"{green}Maraz Ali, {default}raundu başlıyor!"
+	}
+	"Awpprint"
+	{
+		"tr"	"{green}Awp + Sekmeme, {default}raundu başlıyor!"
+	}
+	"Normalprint"
+	{
+		"tr"	"{green}Normal, {default}raundu başlıyor!"
+	}
+	"Taserprint"
+	{
+		"tr"	"{green}Zeus, {default}raundu başlıyor!"
+	}
+	"Shotgunprint"
+	{
+		"tr"	"{green}Pompalı Gravity + 500 Can, {default}raundu başlıyor!"
+	}
+	"Goround"
+	{
+		"tr"	"{default}Raund başladı!"
+	}
+	"Codder"
+	{
+		"tr"	"{default}Bu Eklenti {darkred}ByDexter {green}tarafından kodlandı."
+	}
+}

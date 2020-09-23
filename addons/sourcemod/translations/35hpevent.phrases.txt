@@ -3,83 +3,67 @@
 	"Twinprint"
 	{
 		"#format"	"{1:s}"
-		"en"	"{green}They won {1} credits {default}for winning the {orange}terrorist team."
-		"tr"	"{orange}Terörist takımı {default}kazandığı için {green}{1} kredi kazandılar."
+		"en"	"{default}They won {green}{1} credits {default}for winning the {orange}terrorist team."
 	}
 	"CTwinprint"
 	{
 		"#format"	"{1:s}"
-		"en"	"{green}They won {1} credits {default}for winning the {darkblue}counter-terrorist team."
-		"tr"	"{darkblue}Anti terörist takımı {default}kazandığı için {green}{1} kredi kazandılar."
+		"en"	"{default}They won {green}{1} credits {default}for winning the {darkblue}counter-terrorist team."
 	}
 	"SSGprint"
 	{
-		"en"	"{green}SSG No Scope + No Recoil, {default}round starting!"
-		"tr"	"{green}SSG Dürbünsüz + Sekmeme, {default}raundu başlıyor!"
+		"en"	"{green}Mag7 + Bhop, {default}round starting!"
 	}
 	"Bhopprint"
 	{
-		"en"	"{green}Bhop, {default}round starting!"
-		"tr"	"{green}Bhop, {default}raundu başlıyor!"
+		"en"	"{green}USP + Hs, {default}round starting!"
 	}
 	"Spaceprint"
 	{
-		"en"	"{green}Space, {default}round starting!"
-		"tr"	"{green}Uzay, {default}raundu başlıyor!"
+		"en"	"{green}Negev + NRecoil + Speed, {default}round starting!"
 	}
 	"Speedprint"
 	{
-		"en"	"{green}The Flash, {default}round starting!"
-		"tr"	"{green}Koş Asuman, {default}raundu başlıyor!"
+		"en"	"{green}SSG + NRecoil, {default}round starting!"
 	}
 	"Negevprint"
 	{
-		"en"	"{green}Negev + No Recoil, {default}round starting!"
-		"tr"	"{green}Negev + Sekmeme, {default}raundu başlıyor!"
+		"en"	"{green}Ak47 + 100HP, {default}round starting!"
 	}
 	"Glockprint"
 	{
-		"en"	"{green}Glock, {default}round starting!"
-		"tr"	"{green}Glock, {default}raundu başlıyor!"
+		"en"	"{green}Deagle, {default}round starting!"
 	}
 	"Deagleprint"
 	{
-		"en"	"{green}Deagle OnlyHS, {default}round starting!"
-		"tr"	"{green}Deagle Sadece kafa, {default}raundu başlıyor!"
+		"en"	"{green}Scar20 + NScope, {default}round starting!"
 	}
 	"Dberettaprint"
 	{
 		"en"	"{green}Dual Beretta, {default}round starting!"
-		"tr"	"{green}Maraz Ali, {default}raundu başlıyor!"
 	}
 	"Awpprint"
 	{
 		"en"	"{green}Awp + No Recoil, {default}round starting!"
-		"tr"	"{green}Awp + Sekmeme, {default}raundu başlıyor!"
 	}
 	"Normalprint"
 	{
 		"en"	"{green}Normal, {default}round starting!"
-		"tr"	"{green}Normal, {default}raundu başlıyor!"
 	}
 	"Taserprint"
 	{
 		"en"	"{green}Taser, {default}round starting!"
-		"tr"	"{green}Zeus, {default}raundu başlıyor!"
 	}
 	"Shotgunprint"
 	{
 		"en"	"{green}Shotgun Gravity + 500 HP, {default}round starting!"
-		"tr"	"{green}Pompalı Gravity + 500 Can, {default}raundu başlıyor!"
 	}
 	"Goround"
 	{
 		"en"	"{default}The round has begun!"
-		"tr"	"{default}Raund başladı!"
 	}
 	"Codder"
 	{
 		"en"	"{default}This Plugin {green}was coded by {darkred}ByDexter."
-		"tr"	"{default}Bu Eklenti {darkred}ByDexter {green}tarafından kodlandı."
 	}
 }
