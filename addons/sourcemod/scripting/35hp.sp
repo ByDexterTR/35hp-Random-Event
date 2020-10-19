@@ -22,7 +22,7 @@ public Plugin myinfo =
 	author = "ByDexter", 
 	description = "35hp haritalarında rastgele event yapar", 
 	version = "1.1b", 
-	url = "https://steamcommunity.com/id/ByDexterTR - ByDexter#2947"
+	url = "https://steamcommunity.com/id/ByDexterTR - ByDexter#5494"
 };
 
 public void OnPluginStart()
