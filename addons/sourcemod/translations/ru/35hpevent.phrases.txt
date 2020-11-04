@@ -1,0 +1,69 @@
+"Phrases"
+{
+	"Twinprint"
+	{
+		"#format"	"{1:s}"
+		"ru"	"{default}Они выиграли {green}{1} кредитов {default}за победу над {orange}командой террористов."
+	}
+	"CTwinprint"
+	{
+		"#format"	"{1:s}"
+		"ru"	"{default}Они выиграли {green}{1} кредитов {default}за победу над {darkblue}командой спецназа."
+	}
+	"SSGprint"
+	{
+		"ru"	"{green}Mag7 + Bhop, {default}раунд начинается!"
+	}
+	"Bhopprint"
+	{
+		"ru"	"{green}USP + Hs, {default}раунд начинается!"
+	}
+	"Spaceprint"
+	{
+		"ru"	"{green}Negev + NRecoil + Скорость, {default}раунд начинается!"
+	}
+	"Speedprint"
+	{
+		"ru"	"{green}SSG + NRecoil, {default}раунд начинается!"
+	}
+	"Negevprint"
+	{
+		"ru"	"{green}Ak47 + 100 ОЗ, {default}раунд начинается!"
+	}
+	"Glockprint"
+	{
+		"ru"	"{green}Deagle, {default}раунд начинается!"
+	}
+	"Deagleprint"
+	{
+		"ru"	"{green}Scar20 + NScope, {default}раунд начинается!"
+	}
+	"Dberettaprint"
+	{
+		"ru"	"{green}Dual Beretta, {default}раунд начинается!"
+	}
+	"Awpprint"
+	{
+		"ru"	"{green}Awp + Без отдачи, {default}раунд начинается!"
+	}
+	"Normalprint"
+	{
+		"ru"	"{green}Обычный, {default}раунд начинается!"
+	}
+	"Taserprint"
+	{
+		"ru"	"{green}Taser, {default}раунд начинается!"
+	}
+	"Shotgunprint"
+	{
+		"ru"	"{green}Shotgun Gravity + 500 ОЗ, {default}раунд начинается!"
+	}
+	"Goround"
+	{
+		"ru"	"{default}Раунд начался!"
+	}
+	"Codder"
+	{
+		"ru"	"{default}Этот плагин {green}закодировал {darkred}ByDexter."
+	}
+}
