@@ -24,7 +24,7 @@ public Plugin myinfo =
 	name = "35hp Random Event", 
 	author = "ByDexter", 
 	description = "35hp haritalarında rastgele event yapar", 
-	version = "1.2b", 
+	version = "1.3", 
 	url = "https://steamcommunity.com/id/ByDexterTR - ByDexter#5494"
 };
 
@@ -47,11 +47,11 @@ public void OnPluginStart()
 
 public void OnMapStart()
 {
-	char mapname[PLATFORM_MAX_PATH];
+	char mapname[512];
 	char filename[512];
 	GetPluginFilename(null, filename, sizeof(filename));
 	GetCurrentMap(mapname, sizeof(mapname));
-	if (strcmp(mapname, "35hp_") == -1)
+	if (StrContains(mapname, "35hp_", false) == -1)
 	{
 		ServerCommand("sm plugins unload %s", filename);
 	}
@@ -89,31 +89,27 @@ public void ConVarChanged(ConVar cvar, const char[] oldVal, const char[] newVal)
 		{
 			SetConVarInt(FindConVar("sv_enablebunnyhopping"), 1);
 			SetConVarInt(FindConVar("sv_autobunnyhopping"), 1);
-			SetConVarInt(FindConVar("sv_airaccelerate"), 2000);
+			SetCvar("sv_airaccelerate", 2000);
 			SetConVarInt(FindConVar("sv_staminajumpcost"), 0);
 			SetConVarInt(FindConVar("sv_staminalandcost"), 0);
 			SetConVarInt(FindConVar("sv_staminamax"), 0);
+			SetConVarInt(FindConVar("sv_staminarecoveryrate"), 60);
 		}
 		else
 		{
 			SetConVarInt(FindConVar("sv_enablebunnyhopping"), 0);
 			SetConVarInt(FindConVar("sv_autobunnyhopping"), 0);
-			SetConVarInt(FindConVar("sv_airaccelerate"), 101);
+			SetCvar("sv_airaccelerate", 101);
 			SetConVarFloat(FindConVar("sv_staminajumpcost"), 0.080);
 			SetConVarFloat(FindConVar("sv_staminalandcost"), 0.050);
 			SetConVarInt(FindConVar("sv_staminamax"), 80);
+			SetConVarInt(FindConVar("sv_staminarecoveryrate"), 60);
 		}
 	}
 }
 
 public Action OnRoundStart(Event event, const char[] name, bool dontBroadcast)
 {
-	for (int i = 1; i <= MaxClients; i++)
-	if (IsValidClient(i))
-	{
-		SetEntityHealth(i, 35);
-		SilahlariSil(i);
-	}
 	CreateTimer(3.0, Basla, _, TIMER_FLAG_NO_MAPCHANGE);
 	hpeventi = GetRandomInt(1, 12);
 	char text_prefix[64];
@@ -196,6 +192,8 @@ public Action Basla(Handle timer, any data)
 	{
 		if (IsValidClient(i) && IsPlayerAlive(i))
 		{
+			SetEntityHealth(i, 35);
+			SilahlariSil(i);
 			if (hpeventi == 1)
 			{
 				GivePlayerItem(i, "weapon_mag7");
@@ -207,7 +205,7 @@ public Action Basla(Handle timer, any data)
 			else if (hpeventi == 3)
 			{
 				GivePlayerItem(i, "weapon_negev");
-				SetEntPropFloat(i, Prop_Data, "m_flLaggedMovementValue", 2.4);
+				SetEntPropFloat(i, Prop_Data, "m_flLaggedMovementValue", 2.8);
 			}
 			else if (hpeventi == 4)
 			{
@@ -249,6 +247,7 @@ public Action Basla(Handle timer, any data)
 			}
 		}
 	}
+	return Plugin_Stop;
 }
 
 public Action OnRoundEnd(Event event, const char[] name, bool dontBroadcast)
@@ -274,7 +273,7 @@ public Action OnRoundEnd(Event event, const char[] name, bool dontBroadcast)
 		SetCvar("mp_damage_headshot_only", 0);
 	if (GetConVarInt(FindConVar("mp_freezetime")) != 3)
 		SetCvar("mp_freezetime", 3);
-	if (!g_CTkrediver.BoolValue && !g_Tkrediver.BoolValue)
+	if (g_CTkrediver.BoolValue || g_Tkrediver.BoolValue)
 	{
 		int WinningTeam = GetEventInt(event, "winner");
 		if (WinningTeam == 2)
@@ -306,11 +305,11 @@ public Action OnRoundEnd(Event event, const char[] name, bool dontBroadcast)
 	}
 }
 
-public Action OnPlayerRunCmd(int client, int &buttons, int &impulse, float vel[3], float angles[3], int &weapon)
+public Action OnPlayerRunCmd(int client, int &buttons)
 {
 	if (Block_scope && IsValidClient(client))
 	{
 		buttons &= ~IN_ATTACK2;
 	}
 	return Plugin_Continue;
-}
+} 
