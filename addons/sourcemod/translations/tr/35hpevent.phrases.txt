@@ -2,12 +2,12 @@
 {
 	"Twinprint"
 	{
-		"#format"	"{1:s}"
+		"#format"	"{1:d}"
 		"tr"	"{orange}Terörist takımı {default}kazandığı için {green}{1} kredi kazandılar."
 	}
 	"CTwinprint"
 	{
-		"#format"	"{1:s}"
+		"#format"	"{1:d}"
 		"tr"	"{darkblue}Anti terörist takımı {default}kazandığı için {green}{1} kredi kazandılar."
 	}
 	"SSGprint"

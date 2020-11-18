@@ -2,12 +2,12 @@
 {
 	"Twinprint"
 	{
-		"#format"	"{1:s}"
+		"#format"	"{1:d}"
 		"ru"	"{default}Они выиграли {green}{1} кредитов {default}за победу над {orange}командой террористов."
 	}
 	"CTwinprint"
 	{
-		"#format"	"{1:s}"
+		"#format"	"{1:d}"
 		"ru"	"{default}Они выиграли {green}{1} кредитов {default}за победу над {darkblue}командой спецназа."
 	}
 	"SSGprint"
@@ -64,6 +64,6 @@
 	}
 	"Codder"
 	{
-		"ru"	"{default}Этот плагин {green}закодировал {darkred}ByDexter."
+		"ru"	"{default}спасибо за {green}перевод {darkred}Berry"
 	}
 }

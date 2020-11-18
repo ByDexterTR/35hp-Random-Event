@@ -2,12 +2,12 @@
 {
 	"Twinprint"
 	{
-		"#format"	"{1:s}"
+		"#format"	"{1:d}"
 		"en"	"{default}They won {green}{1} credits {default}for winning the {orange}terrorist team."
 	}
 	"CTwinprint"
 	{
-		"#format"	"{1:s}"
+		"#format"	"{1:d}"
 		"en"	"{default}They won {green}{1} credits {default}for winning the {darkblue}counter-terrorist team."
 	}
 	"SSGprint"
