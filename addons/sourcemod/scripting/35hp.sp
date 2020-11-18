@@ -24,7 +24,7 @@ public Plugin myinfo =
 	name = "35hp Random Event", 
 	author = "ByDexter", 
 	description = "35hp haritalarında rastgele event yapar", 
-	version = "1.2", 
+	version = "1.2b", 
 	url = "https://steamcommunity.com/id/ByDexterTR - ByDexter#5494"
 };
 
@@ -260,10 +260,11 @@ public Action OnRoundEnd(Event event, const char[] name, bool dontBroadcast)
 			SetEntPropFloat(i, Prop_Data, "m_flLaggedMovementValue", 1.0);
 		}
 	}
-	Block_scope = false;
+	if (Block_scope)
+		Block_scope = false;
 	if (GetConVarInt(FindConVar("sm_norecoil_enable")) != 0)
 		SetCvar("sm_norecoil_enable", 0);
-	if (GetConVarInt(FindConVar("sm_norecoil_enable")) != 0)
+	if (GetConVarInt(FindConVar("sv_infinite_ammo")) != 0)
 		SetCvar("sv_infinite_ammo", 0);
 	if (GetConVarInt(FindConVar("sv_gravity")) != 800)
 		SetCvar("sv_gravity", 800);
