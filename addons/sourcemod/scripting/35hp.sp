@@ -1,10 +1,8 @@
 #include <sourcemod>
 #include <sdktools>
 #include <sdkhooks>
-#include <cstrike>
 #include <multicolors>
 #include <store>
-#include <smlib>
 
 #pragma semicolon 1
 #pragma newdecls required
@@ -14,6 +12,7 @@
 #include "files/Snowball.sp"
 #include "files/Oitc.sp"
 #include "files/PistolZoom.sp"
+#include "files/Stocks-smlib.sp"
 
 /* 
  * Thanks for the translation
@@ -28,7 +27,7 @@ public Plugin myinfo =
 	name = "35hp Random Event", 
 	author = "ByDexter", 
 	description = "35hp haritalarında rastgele event yapar", 
-	version = "1.4b - OITC Fix", 
+	version = "1.4c - Optimization", 
 	url = "https://steamcommunity.com/id/ByDexterTR - ByDexter#5494"
 };
 

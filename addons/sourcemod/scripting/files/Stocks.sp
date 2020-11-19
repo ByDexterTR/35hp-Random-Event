@@ -1,3 +1,6 @@
+#define CS_TEAM_T 			2
+#define CS_TEAM_CT			3
+
 public Action OnPlayerRunCmd(int client, int &buttons)
 {
 	if (Block_scope && IsValidClient(client))
