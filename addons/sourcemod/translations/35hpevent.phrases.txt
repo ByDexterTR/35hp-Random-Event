@@ -64,6 +64,34 @@
 	}
 	"Codder"
 	{
-		"en"	"{default}This Plugin {green}was coded by {darkred}ByDexter."
+		"en"	"{default}This Plugin {green}was coded by {lightred}ByDexter."
+	}
+	"Cz75print"
+	{
+		"en"	"{green}Cz75 + No Recoil, {default}round starting!"
+	}
+	"Tavsanprint"
+	{
+		"en"	"{green}Bhop, {default}round starting!"
+	}
+	"Mac10print"
+	{
+		"en"	"{green}Mac10 + No Recoil + Speed, {default}round starting!"
+	}
+	"P90print"
+	{
+		"en"	"{green}P90, {default}round starting!"
+	}
+	"Snowballprint"
+	{
+		"en"	"{green}Snowball, {default}round starting!"
+	}
+	"Oitcprint"
+	{
+		"en"	"{green}OneInTheChamber, {default}round starting!"
+	}
+	"Pistolzoomprint"
+	{
+		"en"	"{green}Tec-9 Pistol Zoom, {default}round starting!"
 	}
 }

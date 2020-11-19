@@ -48,7 +48,7 @@
 	}
 	"Normalprint"
 	{
-		"tr"	"{green}Normal, {default}raundu başlıyor!"
+		"tr"	"{green}Normal, {default}raund başlıyor!"
 	}
 	"Taserprint"
 	{
@@ -64,6 +64,34 @@
 	}
 	"Codder"
 	{
-		"tr"	"{default}Bu Eklenti {darkred}ByDexter {green}tarafından kodlandı."
+		"tr"	"{default}Bu Eklenti {lightred}ByDexter {green}tarafından kodlandı."
+	}
+	"Cz75print"
+	{
+		"tr"	"{green}Cz75 + Sekmeme, {default}raundu başlıyor!"
+	}
+	"Tavsanprint"
+	{
+		"tr"	"{green}Bhop, {default}raundu başlıyor!"
+	}
+	"Mac10print"
+	{
+		"tr"	"{green}Mac10 + Sekmeme + Hız, {default}raundu başlıyor!"
+	}
+	"P90print"
+	{
+		"tr"	"{green}P90, {default}raundu başlıyor!"
+	}
+	"Snowballprint"
+	{
+		"tr"	"{green}Kar Topu, {default}raundu başlıyor!"
+	}
+	"Oitcprint"
+	{
+		"tr"	"{green}OneInTheChamber, {default}raundu başlıyor!"
+	}
+	"Pistolzoomprint"
+	{
+		"tr"	"{green}Tec-9 Pistol Zoom, {default}raundu başlıyor!"
 	}
 }
