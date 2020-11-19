@@ -28,7 +28,7 @@ public Plugin myinfo =
 	name = "35hp Random Event", 
 	author = "ByDexter", 
 	description = "35hp haritalarında rastgele event yapar", 
-	version = "1.4", 
+	version = "1.4b - OITC Fix", 
 	url = "https://steamcommunity.com/id/ByDexterTR - ByDexter#5494"
 };
 

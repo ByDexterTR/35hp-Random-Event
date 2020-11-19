@@ -5,9 +5,15 @@ public Action Oitc_WeapnFire(Event event, const char[] name, bool dontBroadcast)
 	event.GetString("weapon", weaponname, sizeof(weaponname));
 	if (IsValidClient(client) && StrEqual(weaponname, "weapon_deagle"))
 	{
-		Client_RemoveAllWeapons(client);
-		EquipPlayerWeapon(client, GivePlayerItem(client, "weapon_knife"));
+		CreateTimer(0.3, Sifirla, client, TIMER_FLAG_NO_MAPCHANGE);
 	}
+}
+
+public Action Sifirla(Handle timer, int client)
+{
+	Client_RemoveAllWeapons(client);
+	EquipPlayerWeapon(client, GivePlayerItem(client, "weapon_knife"));
+	return Plugin_Stop;
 }
 
 public Action Oitc_PlayerDeath(Event event, const char[] name, bool dontBroadcast)
@@ -15,7 +21,13 @@ public Action Oitc_PlayerDeath(Event event, const char[] name, bool dontBroadcas
 	int client = GetClientOfUserId(event.GetInt("attacker"));
 	if (IsValidClient(client))
 	{
-		Client_RemoveAllWeapons(client);
-		EquipPlayerWeapon(client, GivePlayerWeaponAndAmmo(client, "weapon_deagle", 1, 0));
+		CreateTimer(0.4, Ver, client, TIMER_FLAG_NO_MAPCHANGE);
 	}
+}
+
+public Action Ver(Handle timer, int client)
+{
+	Client_RemoveAllWeapons(client);
+	EquipPlayerWeapon(client, GivePlayerWeaponAndAmmo(client, "weapon_deagle", 1, 0));
+	return Plugin_Stop;
 }
