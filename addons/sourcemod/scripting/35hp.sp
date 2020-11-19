@@ -12,7 +12,7 @@
 #include "files/Snowball.sp"
 #include "files/Oitc.sp"
 #include "files/PistolZoom.sp"
-#include "files/Stocks-smlib.sp"
+#include "files/Vampire.sp"
 
 /* 
  * Thanks for the translation
@@ -27,7 +27,7 @@ public Plugin myinfo =
 	name = "35hp Random Event", 
 	author = "ByDexter", 
 	description = "35hp haritalarında rastgele event yapar", 
-	version = "1.4c - Optimization", 
+	version = "1.5", 
 	url = "https://steamcommunity.com/id/ByDexterTR - ByDexter#5494"
 };
 
@@ -76,46 +76,46 @@ public void ConVarChanged(ConVar cvar, const char[] oldVal, const char[] newVal)
 	{
 		if (g_NoRecoil.BoolValue)
 		{
-			SetConVarInt(FindConVar("weapon_accuracy_nospread"), 1);
-			SetConVarInt(FindConVar("weapon_recoil_cooldown"), 0);
-			SetConVarInt(FindConVar("weapon_recoil_decay1_exp"), 99999);
-			SetConVarInt(FindConVar("weapon_recoil_decay2_exp"), 99999);
-			SetConVarInt(FindConVar("weapon_recoil_decay2_lin"), 99999);
-			SetConVarInt(FindConVar("weapon_recoil_scale"), 0);
-			SetConVarInt(FindConVar("weapon_recoil_suppression_shots"), 500);
+			SetCvar("weapon_accuracy_nospread", 1);
+			SetCvar("weapon_recoil_cooldown", 0);
+			SetCvar("weapon_recoil_decay1_exp", 99999);
+			SetCvar("weapon_recoil_decay2_exp", 99999);
+			SetCvar("weapon_recoil_decay2_lin", 99999);
+			SetCvar("weapon_recoil_scale", 0);
+			SetCvar("weapon_recoil_suppression_shots", 500);
 		}
 		else
 		{
-			SetConVarInt(FindConVar("weapon_accuracy_nospread"), 0);
-			SetConVarFloat(FindConVar("weapon_recoil_cooldown"), 0.55);
-			SetConVarFloat(FindConVar("weapon_recoil_decay1_exp"), 3.5);
-			SetConVarInt(FindConVar("weapon_recoil_decay2_exp"), 8);
-			SetConVarInt(FindConVar("weapon_recoil_decay2_lin"), 18);
-			SetConVarInt(FindConVar("weapon_recoil_scale"), 2);
-			SetConVarInt(FindConVar("weapon_recoil_suppression_shots"), 4);
+			SetCvar("weapon_accuracy_nospread", 0);
+			SetCvarFloat("weapon_recoil_cooldown", 0.55);
+			SetCvarFloat("weapon_recoil_decay1_exp", 3.5);
+			SetCvar("weapon_recoil_decay2_exp", 8);
+			SetCvar("weapon_recoil_decay2_lin", 18);
+			SetCvar("weapon_recoil_scale", 2);
+			SetCvar("weapon_recoil_suppression_shots", 4);
 		}
 	}
 	if (cvar == g_Bhop)
 	{
 		if (g_Bhop.BoolValue)
 		{
-			SetConVarInt(FindConVar("sv_enablebunnyhopping"), 1);
-			SetConVarInt(FindConVar("sv_autobunnyhopping"), 1);
+			SetCvar("sv_enablebunnyhopping", 1);
+			SetCvar("sv_autobunnyhopping", 1);
 			SetCvar("sv_airaccelerate", 2000);
-			SetConVarInt(FindConVar("sv_staminajumpcost"), 0);
-			SetConVarInt(FindConVar("sv_staminalandcost"), 0);
-			SetConVarInt(FindConVar("sv_staminamax"), 0);
-			SetConVarInt(FindConVar("sv_staminarecoveryrate"), 60);
+			SetCvar("sv_staminajumpcost", 0);
+			SetCvar("sv_staminalandcost", 0);
+			SetCvar("sv_staminamax", 0);
+			SetCvar("sv_staminarecoveryrate", 60);
 		}
 		else
 		{
-			SetConVarInt(FindConVar("sv_enablebunnyhopping"), 0);
-			SetConVarInt(FindConVar("sv_autobunnyhopping"), 0);
+			SetCvar("sv_enablebunnyhopping", 0);
+			SetCvar("sv_autobunnyhopping", 0);
 			SetCvar("sv_airaccelerate", 101);
-			SetConVarFloat(FindConVar("sv_staminajumpcost"), 0.080);
-			SetConVarFloat(FindConVar("sv_staminalandcost"), 0.050);
-			SetConVarInt(FindConVar("sv_staminamax"), 80);
-			SetConVarInt(FindConVar("sv_staminarecoveryrate"), 60);
+			SetCvarFloat("sv_staminajumpcost", 0.080);
+			SetCvarFloat("sv_staminalandcost", 0.050);
+			SetCvar("sv_staminamax", 80);
+			SetCvar("sv_staminarecoveryrate", 60);
 		}
 	}
 }
@@ -128,7 +128,7 @@ public Action OnRoundStart(Event event, const char[] name, bool dontBroadcast)
 		{
 			UnblockEntity(i, g_Offset_CollisionGroup);
 			SetEntityHealth(i, 35);
-			SilahlariSil(i);
+			Client_ClearWeapon(i);
 		}
 	}
 	CreateTimer(3.0, Basla, _, TIMER_FLAG_NO_MAPCHANGE);
@@ -244,6 +244,21 @@ public Action OnRoundStart(Event event, const char[] name, bool dontBroadcast)
 		SetCvar("sv_infinite_ammo", 1);
 		CPrintToChatAll("{orchid}[%s] %t", text_prefix, "Pistolzoomprint");
 	}
+	else if (hpeventi == 20)
+	{
+		CPrintToChatAll("{orchid}[%s] %t", text_prefix, "65hpprint");
+	}
+	else if (hpeventi == 21)
+	{
+		CPrintToChatAll("{orchid}[%s] %t", text_prefix, "Vampireprint");
+		CPrintToChatAll("{orchid}[%s] %t", text_prefix, "Helpvampire");
+		HookEvent("player_death", Vampire_PlayerDeath);
+	}
+	else if (hpeventi == 22)
+	{
+		SetCvar("sv_infinite_ammo", 2);
+		CPrintToChatAll("{orchid}[%s] %t", text_prefix, "500hpmachineprint");
+	}
 }
 
 public Action Basla(Handle timer, any data)
@@ -255,7 +270,7 @@ public Action Basla(Handle timer, any data)
 	{
 		if (IsValidClient(i))
 		{
-			SilahlariSil(i);
+			Client_ClearWeapon(i);
 			if (hpeventi == 1)
 			{
 				GivePlayerItem(i, "weapon_mag7");
@@ -340,6 +355,21 @@ public Action Basla(Handle timer, any data)
 			{
 				GivePlayerItem(i, "weapon_tec9");
 			}
+			else if (hpeventi == 20)
+			{
+				GivePlayerItem(i, "weapon_knife");
+				SetEntityHealth(i, 65);
+			}
+			else if (hpeventi == 21)
+			{
+				GivePlayerItem(i, "weapon_knife");
+				SetEntityHealth(i, 35);
+			}
+			else if (hpeventi == 22)
+			{
+				GivePlayerItem(i, "weapon_negev");
+				SetEntityHealth(i, 500);
+			}
 		}
 	}
 	return Plugin_Stop;
@@ -367,6 +397,7 @@ public Action OnRoundEnd(Event event, const char[] name, bool dontBroadcast)
 	if (hpeventi == 17) { UnhookEvent("weapon_fire", Snowball_WeaponFire); }
 	if (hpeventi == 18) { UnhookEvent("weapon_fire", Oitc_WeapnFire); UnhookEvent("player_death", Oitc_PlayerDeath); }
 	if (hpeventi == 19) { UnhookEvent("weapon_fire", Pistolzoom_WeaponFire); UnhookEvent("player_death", Pistolzoom_PlayerDeath); }
+	if (hpeventi == 21) { UnhookEvent("player_death", Vampire_PlayerDeath); }
 	if (g_CTkrediver.BoolValue || g_Tkrediver.BoolValue)
 	{
 		int WinningTeam = GetEventInt(event, "winner");

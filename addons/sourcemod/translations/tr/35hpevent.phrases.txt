@@ -94,4 +94,20 @@
 	{
 		"tr"	"{green}Tec-9 Pistol Zoom, {default}raundu başlıyor!"
 	}
+	"65hpprint"
+	{
+		"tr"	"{green}65 Can, {default}raundu başlıyor!"
+	}
+	"Vampireprint"
+	{
+		"tr"	"{green}Vampir, {default}raundu başlıyor!"
+	}
+	"Helpvampire"
+	{
+		"tr"	"{green}Vampir: {default}Aldığınız kelle başına {blue}+10 Can"
+	}
+	"500hpmachineprint"
+	{
+		"tr"	"{green}500 Can + Negev, {default}raundu başlıyor!"
+	}
 }

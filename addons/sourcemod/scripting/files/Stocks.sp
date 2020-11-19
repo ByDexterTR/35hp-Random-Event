@@ -41,7 +41,19 @@ stock void SetCvar(char[] cvarName, int value)
 	IntCvar.Flags = flags;
 }
 
-void SilahlariSil(int client)
+stock void SetCvarFloat(char[] cvarName, float value)
+{
+	ConVar FloatCvar = FindConVar(cvarName);
+	if (FloatCvar == null)return;
+	int flags = FloatCvar.Flags;
+	flags &= ~FCVAR_NOTIFY;
+	FloatCvar.Flags = flags;
+	FloatCvar.FloatValue = value;
+	flags |= FCVAR_NOTIFY;
+	FloatCvar.Flags = flags;
+}
+
+stock void Client_ClearWeapon(int client)
 {
 	for (int j = 0; j < 12; j++)
 	{

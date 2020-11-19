@@ -94,4 +94,20 @@
 	{
 		"en"	"{green}Tec-9 Pistol Zoom, {default}round starting!"
 	}
+	"65hpprint"
+	{
+		"en"	"{green}65 Hp, {default}round starting!"
+	}
+	"Vampireprint"
+	{
+		"en"	"{green}Vampire, {default}round starting!"
+	}
+	"Helpvampire"
+	{
+		"en"	"{green}Vampire: {blue}+10 Health {default}per head you receive"
+	}
+	"500hpmachineprint"
+	{
+		"en"	"{green}500 Hp + Negev, {default}round starting!"
+	}
 }
