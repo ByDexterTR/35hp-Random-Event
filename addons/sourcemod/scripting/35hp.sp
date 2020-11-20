@@ -132,7 +132,7 @@ public Action OnRoundStart(Event event, const char[] name, bool dontBroadcast)
 		}
 	}
 	CreateTimer(3.0, Basla, _, TIMER_FLAG_NO_MAPCHANGE);
-	hpeventi = GetRandomInt(1, 19);
+	hpeventi = GetRandomInt(1, 22);
 	char text_prefix[64];
 	g_Prefix.GetString(text_prefix, sizeof(text_prefix));
 	if (hpeventi == 1)
