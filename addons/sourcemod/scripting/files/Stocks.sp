@@ -66,22 +66,22 @@ stock void Client_ClearWeapon(int client)
 	}
 }
 
-stock int GivePlayerWeaponAndAmmo(int client, char[] weapon, int clip = -1, int ammo = -1)
+stock int GivePlayerItemAmmo(int client, const char[] weapon, int clip = -1, int ammo = -1)
 {
 	int weaponEnt = GivePlayerItem(client, weapon);
-	if (weaponEnt != -1)
-	{
-		if (clip != -1)
-			SetEntProp(weaponEnt, Prop_Send, "m_iClip1", clip);
-		if (ammo != -1)
-		{
-			int iOffset = FindDataMapInfo(client, "m_iAmmo") + (GetEntProp(weaponEnt, Prop_Data, "m_iPrimaryAmmoType") * 4);
-			SetEntData(client, iOffset, ammo, 4, true);
-			if (GetEngineVersion() == Engine_CSGO)
-			{
-				SetEntProp(weaponEnt, Prop_Send, "m_iPrimaryReserveAmmoCount", ammo);
-			}
-		}
-	}
+	SetPlayerWeaponAmmo(client, weaponEnt, clip, ammo);
 	return weaponEnt;
+}
+
+stock void SetPlayerWeaponAmmo(int client, int weaponEnt, int clip = -1, int ammo = -1)
+{
+	if (weaponEnt == INVALID_ENT_REFERENCE || !IsValidEdict(weaponEnt))
+		return;
+	if (clip != -1)
+		SetEntProp(weaponEnt, Prop_Data, "m_iClip1", clip);
+	if (ammo != -1)
+	{
+		SetEntProp(weaponEnt, Prop_Send, "m_iPrimaryReserveAmmoCount", ammo);
+		SetEntProp(weaponEnt, Prop_Send, "m_iSecondaryReserveAmmoCount", ammo);
+	}
 } 

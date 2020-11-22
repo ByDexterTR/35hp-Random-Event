@@ -28,6 +28,6 @@ public Action Oitc_PlayerDeath(Event event, const char[] name, bool dontBroadcas
 public Action Ver(Handle timer, int client)
 {
 	Client_ClearWeapon(client);
-	EquipPlayerWeapon(client, GivePlayerWeaponAndAmmo(client, "weapon_deagle", 1, 0));
+	EquipPlayerWeapon(client, GivePlayerItemAmmo(client, "weapon_deagle", 1, 0));
 	return Plugin_Stop;
 }

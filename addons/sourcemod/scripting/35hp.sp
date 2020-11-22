@@ -2,7 +2,9 @@
 #include <sdktools>
 #include <sdkhooks>
 #include <multicolors>
+#undef REQUIRE_EXTENSIONS
 #include <store>
+#define REQUIRE_EXTENSIONS
 
 #pragma semicolon 1
 #pragma newdecls required
@@ -19,15 +21,14 @@
  *
  * Tr & En - @me
  * Ru - github.com/Blueberryy / steamcommunity.com/id/ingmodsince2008/
- *
-*/
+ */
 
 public Plugin myinfo = 
 {
 	name = "35hp Random Event", 
 	author = "ByDexter", 
 	description = "35hp haritalarında rastgele event yapar", 
-	version = "1.5", 
+	version = "1.5b", 
 	url = "https://steamcommunity.com/id/ByDexterTR - ByDexter#5494"
 };
 
@@ -348,7 +349,7 @@ public Action Basla(Handle timer, any data)
 			}
 			else if (hpeventi == 18)
 			{
-				GivePlayerWeaponAndAmmo(i, "weapon_deagle", 1, 0);
+				GivePlayerItemAmmo(i, "weapon_deagle", 1, 0);
 				SetEntityHealth(i, 10);
 			}
 			else if (hpeventi == 19)
@@ -428,4 +429,4 @@ public Action OnRoundEnd(Event event, const char[] name, bool dontBroadcast)
 			}
 		}
 	}
-} 
+}
