@@ -28,13 +28,13 @@ public Plugin myinfo =
 	name = "35hp Random Event", 
 	author = "ByDexter", 
 	description = "35hp haritalarında rastgele event yapar", 
-	version = "1.5b", 
+	version = "1.5c", 
 	url = "https://steamcommunity.com/id/ByDexterTR - ByDexter#5494"
 };
 
 public void OnPluginStart()
 {
-	LoadTranslations("35hpevent.phrases.txt");
+	LoadTranslations("35hpevent.phrases");
 	
 	HookEvent("round_start", OnRoundStart, EventHookMode_PostNoCopy);
 	HookEvent("round_end", OnRoundEnd, EventHookMode_PostNoCopy);
@@ -44,11 +44,6 @@ public void OnPluginStart()
 	{
 		SetFailState("Unable to find offset for collision groups.");
 	}
-	
-	g_NoRecoil = CreateConVar("sm_norecoil_enable", "0", "NoRecoil enabled", FCVAR_DONTRECORD, true, 0.0, true, 1.0);
-	g_NoRecoil.AddChangeHook(ConVarChanged);
-	g_Bhop = CreateConVar("sm_bunny_enable", "0", "Bunny enabled", FCVAR_DONTRECORD, true, 0.0, true, 1.0);
-	g_Bhop.AddChangeHook(ConVarChanged);
 	
 	g_Prefix = CreateConVar("35hp_prefix", "ByDexter", "PLUGIN PREFIX", FCVAR_NOTIFY);
 	g_Tkrediver = CreateConVar("twin_credit_enable", "0", "T Give Credit Enabled/Disabled", FCVAR_NOTIFY, true, 0.0, true, 1.0);
@@ -71,56 +66,6 @@ public void OnMapStart()
 	SetCvar("mp_freezetime", 3);
 }
 
-public void ConVarChanged(ConVar cvar, const char[] oldVal, const char[] newVal)
-{
-	if (cvar == g_NoRecoil)
-	{
-		if (g_NoRecoil.BoolValue)
-		{
-			SetCvar("weapon_accuracy_nospread", 1);
-			SetCvar("weapon_recoil_cooldown", 0);
-			SetCvar("weapon_recoil_decay1_exp", 99999);
-			SetCvar("weapon_recoil_decay2_exp", 99999);
-			SetCvar("weapon_recoil_decay2_lin", 99999);
-			SetCvar("weapon_recoil_scale", 0);
-			SetCvar("weapon_recoil_suppression_shots", 500);
-		}
-		else
-		{
-			SetCvar("weapon_accuracy_nospread", 0);
-			SetCvarFloat("weapon_recoil_cooldown", 0.55);
-			SetCvarFloat("weapon_recoil_decay1_exp", 3.5);
-			SetCvar("weapon_recoil_decay2_exp", 8);
-			SetCvar("weapon_recoil_decay2_lin", 18);
-			SetCvar("weapon_recoil_scale", 2);
-			SetCvar("weapon_recoil_suppression_shots", 4);
-		}
-	}
-	if (cvar == g_Bhop)
-	{
-		if (g_Bhop.BoolValue)
-		{
-			SetCvar("sv_enablebunnyhopping", 1);
-			SetCvar("sv_autobunnyhopping", 1);
-			SetCvar("sv_airaccelerate", 2000);
-			SetCvar("sv_staminajumpcost", 0);
-			SetCvar("sv_staminalandcost", 0);
-			SetCvar("sv_staminamax", 0);
-			SetCvar("sv_staminarecoveryrate", 60);
-		}
-		else
-		{
-			SetCvar("sv_enablebunnyhopping", 0);
-			SetCvar("sv_autobunnyhopping", 0);
-			SetCvar("sv_airaccelerate", 101);
-			SetCvarFloat("sv_staminajumpcost", 0.080);
-			SetCvarFloat("sv_staminalandcost", 0.050);
-			SetCvar("sv_staminamax", 80);
-			SetCvar("sv_staminarecoveryrate", 60);
-		}
-	}
-}
-
 public Action OnRoundStart(Event event, const char[] name, bool dontBroadcast)
 {
 	for (int i = 1; i <= MaxClients; i++)
@@ -139,7 +84,7 @@ public Action OnRoundStart(Event event, const char[] name, bool dontBroadcast)
 	if (hpeventi == 1)
 	{
 		SetCvar("sv_infinite_ammo", 2);
-		SetCvar("sm_bunny_enable", 1);
+		BunnyAyarla(true);
 		CPrintToChatAll("{orchid}[%s] %t", text_prefix, "SSGprint");
 	}
 	else if (hpeventi == 2)
@@ -151,13 +96,13 @@ public Action OnRoundStart(Event event, const char[] name, bool dontBroadcast)
 	else if (hpeventi == 3)
 	{
 		SetCvar("sv_infinite_ammo", 2);
-		SetCvar("sm_norecoil_enable", 1);
+		SekmemeAyarla(true);
 		CPrintToChatAll("{orchid}[%s] %t", text_prefix, "Spaceprint");
 	}
 	else if (hpeventi == 4)
 	{
 		SetCvar("sv_infinite_ammo", 2);
-		SetCvar("sm_norecoil_enable", 1);
+		SekmemeAyarla(true);
 		CPrintToChatAll("{orchid}[%s] %t", text_prefix, "Speedprint");
 	}
 	else if (hpeventi == 5)
@@ -184,7 +129,7 @@ public Action OnRoundStart(Event event, const char[] name, bool dontBroadcast)
 	else if (hpeventi == 9)
 	{
 		SetCvar("sv_infinite_ammo", 2);
-		SetCvar("sm_norecoil_enable", 1);
+		SekmemeAyarla(true);
 		CPrintToChatAll("{orchid}[%s] %t", text_prefix, "Awpprint");
 	}
 	else if (hpeventi == 10)
@@ -206,18 +151,18 @@ public Action OnRoundStart(Event event, const char[] name, bool dontBroadcast)
 	else if (hpeventi == 13)
 	{
 		SetCvar("sv_infinite_ammo", 2);
-		SetCvar("sm_norecoil_enable", 1);
+		SekmemeAyarla(true);
 		CPrintToChatAll("{orchid}[%s] %t", text_prefix, "Cz75print");
 	}
 	else if (hpeventi == 14)
 	{
-		SetCvar("sm_bunny_enable", 1);
+		BunnyAyarla(true);
 		CPrintToChatAll("{orchid}[%s] %t", text_prefix, "Tavsanprint");
 	}
 	else if (hpeventi == 15)
 	{
 		SetCvar("sv_infinite_ammo", 2);
-		SetCvar("sm_norecoil_enable", 1);
+		SekmemeAyarla(true);
 		CPrintToChatAll("{orchid}[%s] %t", text_prefix, "Mac10print");
 	}
 	else if (hpeventi == 16)
@@ -349,7 +294,7 @@ public Action Basla(Handle timer, any data)
 			}
 			else if (hpeventi == 18)
 			{
-				GivePlayerItemAmmo(i, "weapon_deagle", 1, 0);
+				GivePlayerItemAmmo(i, "weapon_deagle", 0, 1);
 				SetEntityHealth(i, 10);
 			}
 			else if (hpeventi == 19)
@@ -389,12 +334,12 @@ public Action OnRoundEnd(Event event, const char[] name, bool dontBroadcast)
 		}
 	}
 	if (Block_scope)Block_scope = false;
-	if (GetConVarInt(FindConVar("sm_norecoil_enable")) != 0)SetCvar("sm_norecoil_enable", 0);
-	if (GetConVarInt(FindConVar("sv_infinite_ammo")) != 0)SetCvar("sv_infinite_ammo", 0);
-	if (GetConVarInt(FindConVar("sv_gravity")) != 800)SetCvar("sv_gravity", 800);
-	if (GetConVarInt(FindConVar("sm_bunny_enable")) != 0)SetCvar("sm_bunny_enable", 0);
-	if (GetConVarInt(FindConVar("mp_damage_headshot_only")) != 0)SetCvar("mp_damage_headshot_only", 0);
-	if (GetConVarInt(FindConVar("mp_freezetime")) != 3)SetCvar("mp_freezetime", 3);
+	SekmemeAyarla(false);
+	SetCvar("sv_infinite_ammo", 0);
+	SetCvar("sv_gravity", 800);
+	BunnyAyarla(false);
+	SetCvar("mp_damage_headshot_only", 0);
+	SetCvar("mp_freezetime", 3);
 	if (hpeventi == 17) { UnhookEvent("weapon_fire", Snowball_WeaponFire); }
 	if (hpeventi == 18) { UnhookEvent("weapon_fire", Oitc_WeapnFire); UnhookEvent("player_death", Oitc_PlayerDeath); }
 	if (hpeventi == 19) { UnhookEvent("weapon_fire", Pistolzoom_WeaponFire); UnhookEvent("player_death", Pistolzoom_PlayerDeath); }

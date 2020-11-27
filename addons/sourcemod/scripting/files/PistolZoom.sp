@@ -1,4 +1,4 @@
-int PlayerZoomLevel[MAXPLAYERS];
+int PlayerZoomLevel[MAXPLAYERS] = 90;
 
 public Action Pistolzoom_WeaponFire(Event event, const char[] name, bool dontBroadcast)
 {
